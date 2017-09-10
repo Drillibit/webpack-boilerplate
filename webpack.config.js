@@ -9,6 +9,7 @@ module.exports = {
   },
   devtool: "source-map",
   devServer: {
+    historyApiFallback: true,
     contentBase: path.join(__dirname, "build")
   },
   plugins: [
@@ -29,6 +30,14 @@ module.exports = {
   },
   module:{
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'es2015', 'stage-1']
+        }
+      },
       {
         test: /\.sass$/,
         use: [{
