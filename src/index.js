@@ -1,3 +1,5 @@
-const msg = alert('Hello world');
+
+
+const msg = console.log('Hello world motherfuck!');
 
 module.exports = msg;

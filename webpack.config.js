@@ -1,25 +1,31 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
     app: './src/app.js',
-    print: './src/print.js'
+  },
+  devtool: "source-map",
+  devServer: {
+    contentBase: path.join(__dirname, "build")
   },
   plugins: [
     new CleanWebpackPlugin(['build']),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      title: 'Output Management',
+      minify: {
+        collapseWhitespace: true
+      },
+      hash: true,
+      template: './src/index.html'
     })
   ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'build')
-  },
-  devtool: "source-map",
-  devServer: {
-    contentBase: './'
   },
   module:{
     rules: [
